@@ -8,7 +8,7 @@ using Action = System.Action;
 
 namespace Core.UI
 {
-    public abstract class BaseWindow<TView> : MonoBehaviour, IWindow<TView>, IInternalWindow where TView : class
+    public abstract class BaseWindow<TView> : MonoBehaviour, IWindow<TView>, IInternalWindow where TView : IWindowView
     {
         public event Action WillShow;
         public event Action Shown;

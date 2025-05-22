@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Core.UI
@@ -18,7 +17,7 @@ namespace Core.UI
 
         private void Awake()
         {
-            if (Instance != null && Instance != this)
+            if (Instance && Instance != this)
             {
                 Debug.LogWarning($"There is already another window manager of type {GetType().Name}. Destroying duplicate.");
                 Destroy(gameObject);
@@ -41,7 +40,6 @@ namespace Core.UI
             try
             {
                 var type = window.GetType();
-                Console.WriteLine($"Registering window of type: {type.Name}");
                 
                 if (windows.ContainsKey(type) && windows[type].Contains(window))
                 {
@@ -58,12 +56,11 @@ namespace Core.UI
 
                 if (window is not IInternalWindow internalWindow || window.IsInitialized) return;
                 
-                Console.WriteLine($"Initializing window of type: {type.Name}");
                 internalWindow.ReadyWindow();
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error registering window of type {window?.GetType()?.Name ?? "unknown"}: {e.Message}\n{e.StackTrace}");
+                Console.WriteLine($"Error registering window of type {window.GetType().Name}: {e.Message}\n{e.StackTrace}");
                 if (windows.ContainsKey(window.GetType()))
                 {
                     windows[window.GetType()].Remove(window);

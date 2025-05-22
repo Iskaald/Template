@@ -51,19 +51,5 @@ namespace Core.UI
             var obj = data.colors.FirstOrDefault(x => x.id == rewardType);
             return obj?.color ?? Color.white;
         }
-
-        public static Sprite GetAvatarSprite(string id)
-        {
-            if (!isInitialized) Initialize();
-            
-            var obj = data.avatars.FirstOrDefault(x => x.id == id);
-            return obj?.sprite;
-        }
-
-        public static List<IconData> GetAllAvatars()
-        {
-            if (!isInitialized) Initialize();
-            return new List<IconData>(data.avatars);
-        }
     }
 }

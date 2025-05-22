@@ -11,9 +11,9 @@ namespace Core.UI
         internal void HideInstantInternal();
     }
     
-    public interface IWindow<out TData> : IWindow where TData : class
+    public interface IWindow<out TView> : IWindow where TView : IWindowView
     {
-        TData View { get; }
+        TView View { get; }
     }
     
     public interface IWindow

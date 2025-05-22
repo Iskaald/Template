@@ -1,27 +1,22 @@
 ﻿namespace Core.UI
 {
-    public class ProcessingWindow : BaseWindow<ProcessingWindowData>
+    public class ProcessingWindow : BaseWindow<ProcessingWindowView>
     {
-        private ProcessingWindowAnimator animator = new();
-        
-        public override bool IsInitialized { get; }
+        public override bool IsInitialized => true;
 
         protected override void Initialize()
         {
-            WillHide += ProcessHide;
-            
-            animator.StartDOTweenAnimation(View.workingIcon.transform);
         }
 
         protected override void UpdateData()
         {
-            animator.StartDOTweenAnimation(View.workingIcon.transform);
+            View.StartAnimation();
         }
 
-        private void ProcessHide()
+        protected override void OnHidden()
         {
-            WillHide -= ProcessHide;
-            animator.StopAnimation();
+            base.OnHidden();
+            View.StopAnimation();
         }
     }
 }
